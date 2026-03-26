@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludo AI Master</title>
+    
+    <!-- Tailwind CDN (Works when online) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'ludo-red': '#ef4444',
+              'ludo-green': '#22c55e',
+              'ludo-yellow': '#eab308',
+              'ludo-blue': '#3b82f6',
+              'board-bg': '#f8fafc',
+            },
+            gridTemplateColumns: {
+              '15': 'repeat(15, minmax(0, 1fr))',
+            },
+            gridTemplateRows: {
+              '15': 'repeat(15, minmax(0, 1fr))',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Fallback CSS (Works when offline/CDN fails) -->
+    <style>
+      /* Reset & Base */
+      *, *::before, *::after { box-sizing: border-box; }
+      body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background-color: #020617; color: #f8fafc; overflow: hidden; }
+      
+      /* Scrollbar hiding */
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* Critical Layout Fallbacks (If Tailwind fails) */
+      .flex { display: flex; }
+      .flex-col { flex-direction: column; }
+      .flex-row { flex-direction: row; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .justify-between { justify-content: space-between; }
+      .grow, .flex-1 { flex: 1 1 0%; }
+      .w-full { width: 100%; }
+      .h-full { height: 100%; }
+      .h-screen { height: 100vh; }
+      .min-h-screen { min-height: 100vh; }
+      
+      /* Positioning */
+      .absolute { position: absolute; }
+      .relative { position: relative; }
+      .fixed { position: fixed; }
+      .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+      .z-10 { z-index: 10; }
+      .z-20 { z-index: 20; }
+      .z-30 { z-index: 30; }
+      .z-50 { z-index: 50; }
+
+      /* Spacing (Approximations) */
+      .p-4 { padding: 1rem; }
+      .p-6 { padding: 1.5rem; }
+      .p-8 { padding: 2rem; }
+      .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .mb-8 { margin-bottom: 2rem; }
+      .gap-2 { gap: 0.5rem; }
+      .gap-3 { gap: 0.75rem; }
+      .gap-4 { gap: 1rem; }
+
+      /* Colors & Appearance (Dark Mode Defaults) */
+      .bg-slate-950 { background-color: #020617; }
+      .bg-slate-900 { background-color: #0f172a; }
+      .bg-slate-800 { background-color: #1e293b; }
+      .text-white { color: #ffffff; }
+      .text-slate-300 { color: #cbd5e1; }
+      .text-slate-400 { color: #94a3b8; }
+      
+      /* Borders & Rounded */
+      .rounded-xl { border-radius: 0.75rem; }
+      .rounded-2xl { border-radius: 1rem; }
+      .rounded-full { border-radius: 9999px; }
+      .border { border-width: 1px; border-style: solid; border-color: rgba(255,255,255,0.1); }
+
+      /* Inputs & Buttons Offline Style */
+      input[type="text"] {
+        background: transparent;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        outline: none;
+        padding: 0.5rem 0;
+      }
+      button {
+        cursor: pointer;
+      }
+
+      /* Ludo Board Grid System - CRITICAL */
+      .grid { display: grid; }
+      .grid-cols-15 { grid-template-columns: repeat(15, minmax(0, 1fr)); }
+      .grid-rows-15 { grid-template-rows: repeat(15, minmax(0, 1fr)); }
+      .col-span-6 { grid-column: span 6 / span 6; }
+      .row-span-6 { grid-row: span 6 / span 6; }
+      .col-start-1 { grid-column-start: 1; }
+      .col-start-10 { grid-column-start: 10; }
+      .row-start-1 { grid-row-start: 1; }
+      .row-start-10 { grid-row-start: 10; }
+      
+      /* Specific fixes for setup screen offline */
+      .backdrop-blur-2xl { -webkit-backdrop-filter: blur(40px); backdrop-filter: blur(40px); background: rgba(15, 23, 42, 0.6); }
+      .backdrop-blur-md { -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+      
+      /* Text gradients fallback */
+      .bg-clip-text { -webkit-background-clip: text; background-clip: text; }
+      .text-transparent { color: transparent; background-image: linear-gradient(to right, #818cf8, #22d3ee); }
+
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "framer-motion": "https://esm.sh/framer-motion@^12.34.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-100 text-slate-900 font-sans antialiased overflow-hidden selection:bg-indigo-100">
+    <div id="root"></div>
+  </body>
+</html>
